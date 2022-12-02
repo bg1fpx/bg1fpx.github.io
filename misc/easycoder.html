@@ -1,0 +1,113 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>EasyCoder</title>
+
+<style type="text/css">
+body { background : whitesmoke;
+       color : black; }
+body, p, textarea, button, a { font : 14px Lucida Console, Monospace; }
+p { text-align : center; }
+a:link, a:active, a:visited, a:hover { color : blue;
+                                       text-decoration : none; }
+</style>
+
+<script type="text/javascript">
+String.prototype.trim = function () { return this.replace(/(^\s*)|(\s*$)/g, ""); }
+const maxlength = 200, separators = "GHIJKLMNOPQRSTUVWXYZ";
+var offset = 0;
+
+function encode() // ------------------------------ encode ----------------------------------------
+{ var message, length, count, unicode, rand, code = "";
+
+  message = document.getElementById("message").value.trim();
+  if (message == "")
+    return;
+
+  length = message.length;
+  if (message.substr(0, 1) == "#" && message.substr(length - 1, 1) == "#")
+    return;
+
+  if (length > maxlength)
+  { message = message.substr(0, maxlength);
+    length = maxlength; }
+
+  for (count = 0; count < length; count++)
+  { unicode = message.charCodeAt(count) + (length - count + offset);
+    rand = Math.floor(Math.random() * 20);
+    code += unicode.toString(16) + separators.charAt(rand); }
+
+  code = code.slice(0, code.length - 1);
+  code = "#" + offset.toString(16) + separators.charAt(rand) + code + "#";
+  code = code.toUpperCase();
+  document.getElementById("message").value = code; }
+
+function decode() // ------------------------------ decode ----------------------------------------
+{ var code, re, length, count, data, unicode, message = "";
+
+  code = document.getElementById("message").value.trim();
+  if (code == "")
+    return;
+
+  re = /^[0-9A-Z#]+$/;
+  if (re.test(code) == false)
+    return;
+
+  length = code.length;
+  if (code.substr(0, 1) != "#" || code.substr(length - 1, 1) != "#")
+    return;
+
+  code = code.slice(1, length - 1); // [#]code[#]
+  for (count = 0; count < separators.length; count++)
+    code = eval("code.replace(/" + separators.charAt(count) + "/g, '|')");
+
+  data = code.split("|");
+  length = data.length;
+  offset = parseInt(data[0], 16);
+  for (count = 1; count < length; count++)
+  { unicode = parseInt(data[count], 16) - (length - count + offset);
+    message += String.fromCharCode(unicode); }
+
+  document.getElementById("message").value = message; }
+
+function help() // ------------------------------ help ----------------------------------------
+{ var message = "";
+
+  message += "EasyCoder is an encoding-decoding app for your instant messenger (IM), such as WhatsApp or WeChat. ";
+  message += "It can convert a readable message to an unreadable codeblock, or vice versa.\n\n";
+  message += "== Encoding and Sending ==\n\n";
+  message += "1. Type a message within 200 characters in EasyCoder.\n\n";
+  message += "2. Press \"Encode\" button to convert the message to a codeblock.\n\n";
+  message += "3. Select all the codeblock, including two # tags, and cut it.\n\n";
+  message += "4. Paste it to your IM and send it to your friend.\n\n";
+  message += "== Receiving and Decoding ==\n\n";
+  message += "1. Receive a codeblock in your IM from your friend.\n\n";
+  message += "2. Select all the codeblock, including two # tags, and copy it.\n\n";
+  message += "3. Paste it to EasyCoder.\n\n";
+  message += "4. Press \"Decode\" button to generate a message.";
+  document.getElementById("message").value = message; }
+</script>
+</head>
+
+<body>
+
+<p style="text-align:right"><a href="../index.html" style="color:blue;text-decoration:none">Home</a><br /><a href="../download.html" style="color:blue;text-decoration:none">Download</a></p>
+
+<p><textarea id="message"></textarea></p>
+
+<p>EasyCoder &nbsp;
+<button id="encode" onclick="encode()">Encode</button>
+<button id="decode" onclick="decode()">Decode</button> &nbsp;
+<a href="javascript:void(0)" onclick="help()"><sup>Help</sup></a></p>
+
+<script type="text/javascript">
+document.getElementById("message").style.width = Math.round(screen.availWidth * 0.5) + "px";
+document.getElementById("message").style.height = Math.round(screen.availHeight * 0.5) + "px";
+document.getElementById("encode").style.width = "85px";
+document.getElementById("decode").style.width = "85px";
+offset = Math.floor(Math.random() * (999 - 100 + 1) + 100);
+</script>
+
+</body>
+</html>
