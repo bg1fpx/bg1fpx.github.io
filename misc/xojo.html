@@ -1,0 +1,639 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Xojo Reference</title>
+
+<style type="text/css">
+body { background : whitesmoke;
+       color : black; }
+body, p, td, pre { font : 16px Lucida Console, Monospace; }
+p { text-align : center; }
+table { border-collapse : collapse;
+        margin : auto; }
+td { border : 1px solid gray;
+     padding : 5px; }
+pre { margin : 0px; }
+td.red { color : red; }
+td.blue { color : blue; }
+</style>
+</head>
+
+<body>
+
+<p style="text-align:right"><a href="../index.html" style="color:blue;text-decoration:none">Home</a><br /><a href="../download.html" style="color:blue;text-decoration:none">Download</a></p>
+
+<p>Xojo Reference</p>
+
+<p><table>
+<tr><td class=red>Append</td> <!---------- Append ---------->
+<td><pre>Dim a() As Integer = Array(1, 3, 5, 7)
+a.Append 9
+MsgBox Str(a(Ubound(a)))</pre></td>
+<td class=blue>9</td></tr>
+
+<tr><td class=red>Array</td> <!---------- Array ---------->
+<td><pre>Dim a() As Integer = Array(1, 3, 5, 7, 9)
+MsgBox Str(a(2))</pre></td>
+<td class=blue>5</td></tr>
+
+<tr><td class=red>Asc</td> <!---------- Asc ---------->
+<td><pre>Dim i As Integer
+i = Asc("*")
+MsgBox Str(i)</pre></td>
+<td class=blue>42</td></tr>
+
+<tr><td class=red>Beep</td> <!---------- Beep ---------->
+<td><pre>Beep</pre></td>
+<td class=blue>beep one time</td></tr>
+
+<tr><td class=red>Bin</td> <!---------- Bin ---------->
+<td><pre>Dim s As String
+s = Bin(100)
+MsgBox s</pre></td>
+<td class=blue>1100100</td></tr>
+
+<tr><td class=red>BinaryStream.Create</td> <!---------- BinaryStream.Create ---------->
+<td><pre>Dim f As FolderItem
+Dim b As BinaryStream
+Dim i As UInt16 = 65535
+f = GetFolderItem("sample.bin")
+b = BinaryStream.Create(f, True)
+b.WriteUInt16 i
+b.Close</pre></td>
+<td class=blue>65535 is written in</td></tr>
+
+<tr><td class=red>BinaryStream.Open</td> <!---------- BinaryStream.Open ---------->
+<td><pre>Dim f As FolderItem
+Dim b As BinaryStream
+Dim i As UInt16
+f = GetFolderItem("sample.bin")
+b = BinaryStream.Open(f, False)
+i = b.ReadUInt16
+b.Close</pre></td>
+<td class=blue>65535 is read out</td></tr>
+
+<tr><td class=red>Bitwise</td> <!---------- Bitwise ---------->
+<td><pre>Dim i As UInt64
+i = Bitwise.ShiftLeft(8, 1)
+MsgBox Str(i)
+i = Bitwise.ShiftRight(8, 1)
+MsgBox Str(i)</pre></td>
+<td class=blue>16, 4</td></tr>
+
+<tr><td class=red>ByRef</td> <!---------- ByRef ---------->
+<td><pre>(1) App.Open
+Dim i As Integer = 3
+m(i)
+MsgBox Str(i)
+m(i)
+MsgBox Str(i)
+
+(2) m(ByRef j As Integer) // add a shared method
+j = j * j</pre></td>
+<td class=blue>9, 81</td></tr>
+
+<tr><td class=red>ByVal</td> <!---------- ByVal ---------->
+<td><pre>(1) App.Open
+Dim i As Integer = 3
+m(i)
+MsgBox Str(i)
+m(i)
+MsgBox Str(i)
+
+(2) m(ByVal j As Integer) // add a shared method
+j = j * j</pre></td>
+<td class=blue>3, 3</td></tr>
+
+<tr><td class=red>Ceil</td> <!---------- Ceil ---------->
+<td><pre>Dim i As Integer
+i = Ceil(1.234)
+MsgBox Str(i)</pre></td>
+<td class=blue>2</td></tr>
+
+<tr><td class=red>Chr</td> <!---------- Chr ---------->
+<td><pre>Dim s As String
+s = Chr(64)
+MsgBox s</pre></td>
+<td class=blue>@</td></tr>
+
+<tr><td class=red>Clipboard</td> <!---------- Clipboard ---------->
+<td><pre>Dim c As New Clipboard
+c.Text = "Hello World"
+MsgBox c.Text
+c.Close</pre></td>
+<td class=blue>Hello World</td></tr>
+
+<tr><td class=red>Const</td> <!---------- Const ---------->
+<td><pre>Const pi = 3.14
+MsgBox Str(pi)</pre></td>
+<td class=blue>3.14</td></tr>
+
+<tr><td class=red>Continue</td> <!---------- Continue ---------->
+<td><pre>Dim i As Integer
+For i = 1 To 5
+  If i = 3 Then Continue
+  MsgBox Str(i)
+Next i</pre></td>
+<td class=blue>1, 2, 4, 5</td></tr>
+
+<tr><td class=red>ConvertEncoding</td> <!---------- ConvertEncoding ---------->
+<td><pre>Dim f As FolderItem
+Dim t As TextOutputStream
+Dim s As String = "posição"
+f = GetFolderItem("sample.txt")
+t = TextOutputStream.Create(f)
+t.WriteLine s.ConvertEncoding(Encodings.UTF8)
+t.Close</pre></td>
+<td class=blue>"posição" is written in</td></tr>
+
+<tr><td class=red>CountFields</td> <!---------- CountFields ---------->
+<td><pre>Dim i As Integer
+i = CountFields("Real Studio Documentation", " ")
+MsgBox Str(i)</pre></td>
+<td class=blue>3</td></tr>
+
+<tr><td class=red>Date</td> <!---------- Date ---------->
+<td><pre>Dim d As New Date
+MsgBox Str(d.Year) + Str(d.Month) + Str(d.Day)</pre></td>
+<td class=blue>20171226</td></tr>
+
+<tr><td class=red>Dim</td> <!---------- Dim ---------->
+<td><pre>Dim i As Integer = 5
+MsgBox Str(i)</pre></td>
+<td class=blue>5</td></tr>
+
+<tr><td class=red>Do</td> <!---------- Do ---------->
+<td><pre>Dim i As Integer
+Do
+  i = i + 1
+Loop Until i &gt; 100
+MsgBox Str(i)</pre></td>
+<td class=blue>101</td></tr>
+
+<tr><td class=red>DoEvents</td> <!---------- DoEvents ---------->
+<td><pre>app.DoEvents()</pre></td>
+<td class=blue>keep the app responsive</td></tr>
+
+<tr><td class=red>Encodings</td> <!---------- Encodings ---------->
+<td><pre>Dim i As UInt16 = 22909
+MsgBox Chr(i)
+MsgBox Encodings.UTF8.Chr(i)</pre></td>
+<td class=blue>Y} (incorrect)<br />好 (correct)</td></tr>
+
+<tr><td class=red>Exception</td> <!---------- Exception ---------->
+<td><pre>Dim a(5) As Integer
+a(6) = 123
+Exception e As RuntimeException
+MsgBox "continue"</pre></td>
+<td class=blue>continue (build an .exe file and run)</td></tr>
+
+<tr><td class=red>Exit</td> <!---------- Exit ---------->
+<td><pre>Dim i As Integer
+For i = 1 To 10
+  If i &gt; 5 Then Exit For
+  MsgBox Str(i)
+Next i</pre></td>
+<td class=blue>1, 2, 3, 4, 5</td></tr>
+
+<tr><td class=red>Floor</td> <!---------- Floor ---------->
+<td><pre>Dim i As Integer
+i = Floor(1.234)
+MsgBox Str(i)</pre></td>
+<td class=blue>1</td></tr>
+
+<tr><td class=red>For</td> <!---------- For ---------->
+<td><pre>Dim i, j As Integer
+For i = 1 To 100
+  j = j + i
+Next i
+MsgBox Str(j)</pre></td>
+<td class=blue>5050</td></tr>
+
+<tr><td class=red>For Each</td> <!---------- For Each ---------->
+<td><pre>Dim a(), i, j As Integer
+a = Array(1, 2, 3, 4, 5)
+For Each i In a
+  j = j + i
+Next i
+MsgBox Str(j)</pre></td>
+<td class=blue>15</td></tr>
+
+<tr><td class=red>Format</td> <!---------- Format ---------->
+<td><pre>Dim s As String
+s = Format(1234.5, "\$#,###.00")
+MsgBox s</pre></td>
+<td class=blue>$1,234.50</td></tr>
+
+<tr><td class=red>GetFolderItem</td> <!---------- GetFolderItem ---------->
+<td><pre>see TextOutputStream.Create</pre></td>
+<td class=blue>&nbsp;</td></tr>
+
+<tr><td class=red>GetOpenFolderItem</td> <!---------- GetOpenFolderItem ---------->
+<td><pre>Dim t As New FileType
+Dim f As FolderItem
+t.Name = "JPEG Files"
+t.MacType = "JPEG"
+t.Extensions = ".jpg"
+f = GetOpenFolderItem(t)
+If f &lt;&gt; Nil Then MsgBox f.Name</pre></td>
+<td class=blue>sample.jpg</td></tr>
+
+<tr><td class=red>GoTo</td> <!---------- GoTo ---------->
+<td><pre>Dim i As Integer
+For i = 1 To 100
+  If i &gt; 50 Then GoTo stop
+Next i
+stop:
+MsgBox Str(i)</pre></td>
+<td class=blue>51</td></tr>
+
+<tr><td class=red>Hex</td> <!---------- Hex ---------->
+<td><pre>Dim s As String
+s = Hex(100)
+MsgBox s</pre></td>
+<td class=blue>64</td></tr>
+
+<tr><td class=red>If</td> <!---------- If ---------->
+<td><pre>Dim i As Integer = 3
+If i = 3 Then
+  MsgBox "three"
+Else
+  MsgBox "not three"
+End If</pre></td>
+<td class=blue>three</td></tr>
+
+<tr><td class=red>#If</td> <!---------- #If ---------->
+<td><pre>Dim s As String
+#If TargetWindows Then
+  s = "W"
+#ElseIf TargetMacOS Then
+  s = "M"
+#ElseIf TargetLinux Then
+  s = "L"
+#EndIf
+MsgBox s</pre></td>
+<td class=blue>W in Windows</td></tr>
+
+<tr><td class=red>Insert</td> <!---------- Insert ---------->
+<td><pre>Dim a() As String = Array("a", "b", "d")
+a.Insert 2, "c"
+MsgBox Str(a(2))</pre></td>
+<td class=blue>c</td></tr>
+
+<tr><td class=red>InStr</td> <!---------- InStr ---------->
+<td><pre>Dim i As Integer
+i = InStr("Hello", "e")
+MsgBox Str(i)</pre></td>
+<td class=blue>2</td></tr>
+
+<tr><td class=red>IsConnected</td> <!---------- IsConnected ---------->
+<td><pre>If System.Network.IsConnected Then MsgBox "connected"</pre></td>
+<td class=blue>connected</td></tr>
+
+<tr><td class=red>IsNumeric</td> <!---------- IsNumeric ---------->
+<td><pre>Dim b1, b2 As Boolean
+b1 = IsNumeric("99.99")
+b2 = IsNumeric("99.99USD")
+MsgBox Str(b1)
+MsgBox Str(b2)</pre></td>
+<td class=blue>True, False</td></tr>
+
+<tr><td class=red>Join</td> <!---------- Join ---------->
+<td><pre>Dim a(), s As String
+a = Array("a", "b", "c")
+s = Join(a, "/")
+MsgBox s</pre></td>
+<td class=blue>a/b/c</td></tr>
+
+<tr><td class=red>Keyboard</td> <!---------- Keyboard ---------->
+<td><pre>If Keyboard.AsyncKeyDown(&h7B) Then
+  MsgBox "Left arrow key is pressed"
+End If</pre></td>
+<td class=blue>Left arrow key is pressed (paste the code into TextField1.KeyDown)</td></tr>
+
+<tr><td class=red>Left</td> <!---------- Left ---------->
+<td><pre>Dim s As String
+s = Left("Hello World", 5)
+MsgBox s</pre></td>
+<td class=blue>Hello</td></tr>
+
+<tr><td class=red>Len</td> <!---------- Len ---------->
+<td><pre>Dim i As Integer
+i = Len("Hello World")
+MsgBox Str(i)</pre></td>
+<td class=blue>11</td></tr>
+
+<tr><td class=red>Lowercase</td> <!---------- Lowercase ---------->
+<td><pre>Dim s As String
+s = Lowercase("FOX")
+MsgBox s</pre></td>
+<td class=blue>fox</td></tr>
+
+<tr><td class=red>LTrim</td> <!---------- LTrim ---------->
+<td><pre>Dim s As String
+s = "*" + LTrim(" Hello")
+MsgBox s</pre></td>
+<td class=blue>*Hello</td></tr>
+
+<tr><td class=red>Max</td> <!---------- Max ---------->
+<td><pre>MsgBox Str(Max(1, 2, 3, 4, 5))</pre></td>
+<td class=blue>5</td></tr>
+
+<tr><td class=red>Mid</td> <!---------- Mid ---------->
+<td><pre>Dim s As String
+s = Mid("Hello World", 1, 5)
+MsgBox s</pre></td>
+<td class=blue>Hello</td></tr>
+
+<tr><td class=red>Min</td> <!---------- Min ---------->
+<td><pre>MsgBox Str(Min(1, 2, 3, 4, 5))</pre></td>
+<td class=blue>1</td></tr>
+
+<tr><td class=red>MsgBox</td> <!---------- MsgBox ---------->
+<td><pre>MsgBox "Hello World"</pre></td>
+<td class=blue>Hello World</td></tr>
+
+<tr><td class=red>Mutex</td> <!---------- Mutex ---------->
+<td><pre>(1) App property
+instance As Mutex
+
+(2) App.Open
+App.instance = New Mutex("AppName")
+If Not App.instance.TryEnter Then
+  MsgBox "AppName is already running!"
+  App.instance = Nil
+  Quit
+End If
+
+(3) App.Close
+If App.instance &lt;&gt; Nil Then App.instance.Leave</pre></td>
+<td class=blue>AppName is already running!</td></tr>
+
+<tr><td class=red>Oct</td> <!---------- Oct ---------->
+<td><pre>Dim s As String
+s = Oct(100)
+MsgBox s</pre></td>
+<td class=blue>144</td></tr>
+
+<tr><td class=red>Pop</td> <!---------- Pop ---------->
+<td><pre>Dim a(), i As Integer
+a = Array(1, 3, 5, 7, 9)
+i = a.Pop
+MsgBox Str(a(Ubound(a)))</pre></td>
+<td class=blue>7</td></tr>
+
+<tr><td class=red>#Pragma</td> <!---------- #Pragma ---------->
+<td><pre>#Pragma BoundsChecking False
+' a complicated array operation
+#Pragma BoundsChecking True</pre></td>
+<td class=blue>&nbsp;</td></tr>
+
+<tr><td class=red>Quit</td> <!---------- Quit ---------->
+<td><pre>Quit</pre></td>
+<td class=blue>quit the app</td></tr>
+
+<tr><td class=red>Random</td> <!---------- Random ---------->
+<td><pre>Dim r As New Random
+MsgBox Str(r.InRange(1, 100))</pre></td>
+<td class=blue>83</td></tr>
+
+<tr><td class=red>Redim</td> <!---------- Redim ---------->
+<td><pre>Dim a(10) As String
+Redim a(Ubound(a) + 10)
+MsgBox Str(Ubound(a))</pre></td>
+<td class=blue>20</td></tr>
+
+<tr><td class=red>RegEx</td> <!---------- RegEx ---------->
+<td><pre>Dim re As New RegEx
+re.SearchPattern = "<[^&lt;&gt;]+>" ' any character except &lt; and >
+re.ReplacementPattern = ""
+re.Options.ReplaceAllMatches = True
+Dim s1 As String = "&lt;span&gt;Hello World&lt;/span&gt;"
+Dim s2 As String = re.Replace(s1)
+MsgBox s2</pre></td>
+<td class=blue>Hello World</td></tr>
+
+<tr><td class=red>Rem</td> <!---------- Rem ---------->
+<td><pre>Dim b1, b2, b3, b4, b5 As Boolean
+b1 = True
+b2 = False
+b3 = b1 And b2 Rem False
+b4 = b1 Or b2 // True
+b5 = b1 Xor b2 ' True
+Msgbox Str(b3) + ", " +Str(b4) + ", " + Str(b5)</pre></td>
+<td class=blue>False, True, True</td></tr>
+
+<tr><td class=red>Remove</td> <!---------- Remove ---------->
+<td><pre>Dim a() As String = Array("a", "b", "c", "d")
+a.Remove 2
+MsgBox Str(a(2))</pre></td>
+<td class=blue>d</td></tr>
+
+<tr><td class=red>Replace</td> <!---------- Replace ---------->
+<td><pre>Dim s As String
+s = Replace("rabbid", "d", "t")
+MsgBox s</pre></td>
+<td class=blue>rabbit</td></tr>
+
+<tr><td class=red>ReplaceAll</td> <!---------- ReplaceAll ---------->
+<td><pre>Dim s As String
+s = ReplaceAll("rappit", "p", "b")
+MsgBox s</pre></td>
+<td class=blue>rabbit</td></tr>
+
+<tr><td class=red>Return</td> <!---------- Return ---------->
+<td><pre>(1) App.Open
+Dim i As Integer
+i = m(9)
+MsgBox Str(i)
+
+(2) m(j As Integer) As Integer // add a shared method
+Return j * j</pre></td>
+<td class=blue>81</td></tr>
+
+<tr><td class=red>Right</td> <!---------- Right ---------->
+<td><pre>Dim s As String
+s = Right("Hello World", 5)
+MsgBox s</pre></td>
+<td class=blue>World</td></tr>
+
+<tr><td class=red>Rnd</td> <!---------- Rnd ---------->
+<td><pre>Dim d As Double
+d = Rnd
+MsgBox Str(d)</pre></td>
+<td class=blue>0.6326628</td></tr>
+
+<tr><td class=red>Round</td> <!---------- Round ---------->
+<td><pre>Dim d As Double
+d = Round(1.7)
+MsgBox Str(d)</pre></td>
+<td class=blue>2</td></tr>
+
+<tr><td class=red>RTrim</td> <!---------- RTrim ---------->
+<td><pre>Dim s As String
+s = RTrim("Hello ") + "*"
+MsgBox s</pre></td>
+<td class=blue>Hello*</td></tr>
+
+<tr><td class=red>Select</td> <!---------- Select ---------->
+<td><pre>Dim i As Integer = 3
+Dim s As String
+Select Case i
+Case 1
+  s = "one"
+Case 2
+  s = "two"
+Case 3
+  s = "three"
+Else
+  s = "greater than three"
+End Select
+MsgBox s</pre></td>
+<td class=blue>three</td></tr>
+
+<tr><td class=red>ShowURL</td> <!---------- ShowURL ---------->
+<td><pre>ShowURL "http://www.xojo.com"</pre></td>
+<td class=blue>launch web browser</td></tr>
+
+<tr><td class=red>Shuffle</td> <!---------- Shuffle ---------->
+<td><pre>Dim a(), i As Integer
+a = Array(1, 2, 3, 4, 5, 6, 7, 8, 9)
+a.Shuffle
+For i = 0 To Ubound(a)
+  MsgBox Str(a(i))
+Next i</pre></td>
+<td class=blue>3, 2, 8, 9, 5, 4, 7, 1, 6</td></tr>
+
+<tr><td class=red>Sort</td> <!---------- Sort ---------->
+<td><pre>Dim a(), i As Integer
+a = Array(9, 7, 5, 3, 1)
+a.Sort
+For i = 0 To Ubound(a)
+  MsgBox Str(a(i))
+Next i</pre></td>
+<td class=blue>1, 3, 5, 7, 9</td></tr>
+
+<tr><td class=red>Sortwith</td> <!---------- Sortwith ---------->
+<td><pre>Dim a() As Integer = Array(4, 3, 2, 1)
+Dim b() As String = Array("d", "c", "b", "a")
+Dim i As Integer
+a.Sortwith(b)
+For i = 0 To Ubound(a)
+  MsgBox Str(a(i)) + b(i)
+Next i</pre></td>
+<td class=blue>1a, 2b, 3c, 4d</td></tr>
+
+<tr><td class=red>Split</td> <!---------- Split ---------->
+<td><pre>Dim a() As String
+a = Split("Real Studio Documentation", " ")
+MsgBox a(Ubound(a))</pre></td>
+<td class=blue>Documentation</td></tr>
+
+<tr><td class=red>Static</td> <!---------- Static ---------->
+<td><pre>(1) App.Open
+m()
+m()
+m()
+
+(2) m() // add a shared method
+Static i As Integer
+i = i + 1
+MsgBox Str(i)</pre></td>
+<td class=blue>1, 2, 3</td></tr>
+
+<tr><td class=red>Str</td> <!---------- Str ---------->
+<td><pre>Dim i As Integer = 123
+Dim s As String
+s = Str(i)
+MsgBox s</pre></td>
+<td class=blue>123</td></tr>
+
+<tr><td class=red>StrComp</td> <!---------- StrComp ---------->
+<td><pre>If StrComp("FOX", "fox", 1) &lt;&gt; 0 Then MsgBox "not equal"</pre></td>
+<td class=blue>not equal</td></tr>
+
+<tr><td class=red>TextInputStream.Open</td> <!---------- TextInputStream.Open ---------->
+<td><pre>Dim f As FolderItem
+Dim t As TextInputStream
+Dim s As String
+f = GetFolderItem("sample.txt")
+If f.Exists Then
+  t = TextInputStream.Open(f)
+Else
+  Quit
+End If
+While Not t.EOF
+  s = t.ReadLine()
+Wend
+t.Close</pre></td>
+<td class=blue>"Hello World" is read out</td></tr>
+
+<tr><td class=red>TextOutputStream.Create</td> <!---------- TextOutputStream.Create ---------->
+<td><pre>Dim f As FolderItem
+Dim t As TextOutputStream
+f = GetFolderItem("sample.txt")
+Try
+  t = TextOutputStream.Create(f)
+Catch
+  Quit
+End Try
+t.WriteLine "Hello World"
+t.Close</pre></td>
+<td class=blue>"Hello World" is written in</td></tr>
+
+<tr><td class=red>Trim</td> <!---------- Trim ---------->
+<td><pre>Dim s As String
+s = "*" + Trim(" Hello ") + "*"
+MsgBox s</pre></td>
+<td class=blue>*Hello*</td></tr>
+
+<tr><td class=red>Try</td> <!---------- Try ---------->
+<td><pre>Dim a(5) As Integer = Array(1, 2, 3, 4, 5)
+Try
+  a(6) = 6
+Catch e As OutOfBoundsException
+  MsgBox "Continue"
+Finally
+  MsgBox "Continue"
+End Try</pre></td>
+<td class=blue>Continue, Continue (build an .exe file and run)</td></tr>
+
+<tr><td class=red>Ubound</td> <!---------- Ubound ---------->
+<td><pre>Dim a(100), i As Integer
+i = Ubound(a)
+MsgBox Str(i)</pre></td>
+<td class=blue>100</td></tr>
+
+<tr><td class=red>Uppercase</td> <!---------- Uppercase ---------->
+<td><pre>Dim s As String
+s = Uppercase("fox")
+MsgBox s</pre></td>
+<td class=blue>FOX</td></tr>
+
+<tr><td class=red>UserCancelled</td> <!---------- UserCancelled ---------->
+<td><pre>Dim i As UInt32
+For i = 0 To 1000000
+  ProgressBar1.Value = (i / 1000000) * ProgressBar1.Maximum
+  If i Mod 10000 = 0 Then app.DoEvents()
+  If UserCancelled Then Exit For
+Next i</pre></td>
+<td class=blue>press escape key to cancel</td></tr>
+
+<tr><td class=red>Val</td> <!---------- Val ---------->
+<td><pre>Dim d As Double
+d = Val("99.99USD")
+MsgBox Str(d)</pre></td>
+<td class=blue>99.99</td></tr>
+
+<tr><td class=red>While</td> <!---------- While ---------->
+<td><pre>Dim i As Integer
+While i &lt; 100
+  i = i + 1
+Wend
+MsgBox Str(i)</pre></td>
+<td class=blue>100</td></tr>
+</table></p>
+
+</body>
+</html>
